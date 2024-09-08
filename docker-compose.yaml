@@ -1,0 +1,34 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: fastapi-lead-manager
+    networks:
+      - postgres-network
+    env_file:
+      - .env
+    environment:
+      PORT: 8000
+    ports:
+      - '8000:8000'
+    restart: "always"
+
+  database:
+    container_name: database
+    image: 'postgres:16.4-alpine'
+    ports:
+      - 15432:5432
+    env_file:
+      - .env
+    networks:
+      - postgres-network
+    volumes:
+      - ${PWD}/db-data/:/var/lib/postgresql/data/
+    restart: "always"
+    # - ${PWD}/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+networks: 
+  postgres-network:
+    driver: bridge
+
