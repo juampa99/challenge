@@ -1,10 +1,14 @@
 # Lead Manager
 
 - [Preface](#preface)
-- [ER diagram](#er-diagram)
+- [Design patterns](#design-patterns)
+   * [Layers in this application](#layers-in-this-application)
+   * [Why use DTOs](#why-use-dtos)
+- [Database ER diagram](#database-er-diagram)
 - [Requirements](#requirements)
 - [Production](#production)
 - [Development](#development)
+- [API Documentation](#api-documentation)
 - [Whats missing](#whats-missing)
 
 ## Preface
@@ -18,11 +22,25 @@ amount of classes as careers they are pursuing. I'll assume `Ns (N of subjects) 
 
 Regarding the installation:
 
-This guide assumes you are using ubuntu, debian or some other debian based distribution
+This guide assumes you are using a debian based distribution
 
-## ER diagram
+## Design patterns
 
-![ER-diagram](./resources/ER-diagram.png)
+### Layers in this application
+
+A simple controller -> repository pattern is used. The service layer (the layer that manages the bussiness logic of the application) was omitted as there was no bussiness logic at all to implement.
+
+<img src="./resources/layers-diagram.png" alt="layers-diagram" width="400"/>
+
+### Why use DTOs
+
+DTOs are a great way to decouple the data access layer from the rest of the application, as it provides an intermediate format to transfer queried data, and to also validate new objects that may or may not comply with the validation rules of the application. This also allows us to hide certain fields that we may not want users to see and avoid circular references (i.e. related entities that contain each other).
+
+<img src="./resources/dtos.png" alt="dto-diagram" width="350"/>
+
+## Database ER diagram
+
+<img src="./resources/ER-diagram.png" alt="ER-Diagram" width="300"/>
 
 ## Requirements
 
@@ -50,4 +68,6 @@ For an interactive API documentation you can go to `localhost:8000/docs` (replac
 ## Whats missing
 
 * Unit testing for repositories
+* Bussiness logic layer between the Controller and Repository layers if needed
 
+<!-- Index (table of contents) generated with https://github.com/derlin/bitdowntoc -->
