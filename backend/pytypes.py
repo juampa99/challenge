@@ -39,19 +39,4 @@ class Lead(BaseModel):
             return countries.lookup(c).name
         except LookupError:
             raise InvalidCountryError(c)
-
-    @classmethod
-    def from_model(cls, model):
-        careers = []
-        for career in model.careers:
-            subjects = [subject.to_dict() for subject in career.subjects]
-            career_dict = career.to_dict()
-            career_dict["subjects"] = subjects
-
-            careers.append(career_dict)
-
-        lead_dict = model.to_dict()
-        lead_dict["careers"] = careers
-
-        return Lead(**lead_dict)
-
+    
