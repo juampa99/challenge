@@ -58,8 +58,10 @@ DTOs are a great way to decouple the data access layer from the rest of the appl
 * Create a virtual environment running `python3 -m venv venv`
 * Activate virtual environment running `source venv/bin/activate`
 * Install requirements with `pip install -r requirements.txt`
+* Create a .env file in the backend folder containing the following parameters:
+    * environment=test
 
-* Run application with `uvicorn app:app --forwarded-allow-ips='*' --host 0.0.0.0 --workers 3 --reload`
+* Run application with `uvicorn app:app --forwarded-allow-ips='*' --host 0.0.0.0 --workers 3 --reload --env-file .env` (remember to `cd` in the `backend` directory)
 
 ## API Documentation
 
